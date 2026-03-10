@@ -164,4 +164,4 @@ ruff check .      # optional: linting
 
 ## Acknowledgments
 
-Thanks to [Panther Labs](https://panther.com/) for permitting this code to be open sourced under the MIT license. The original implementation was developed while the author was employed at Panther; the company has kindly allowed it to be released for the community to use and extend.
+Thanks to [Panther Labs](https://panther.com/) for permitting this code to be open sourced under the MIT license. The original implementation was developed while the author was employed at Panther. The company has kindly allowed it to be released for the community to use and extend.
