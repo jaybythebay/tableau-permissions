@@ -1,0 +1,65 @@
+[build-system]
+requires = ["setuptools>=42", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "tableau-permissions"
+version = "0.1.0"
+description = "Manage Tableau Online/Server projects, groups, and permissions via config and CLI"
+readme = "README.md"
+requires-python = ">=3.9"
+license = { text = "MIT License" }
+authors = [
+    { name = "Jay Rosenthal", email = "jaypercussion@gmail.com" }
+]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+]
+
+dependencies = [
+    "tableauserverclient == 0.40",
+    "tabulate >= 0.9.0",
+    "PyYAML >= 6.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest >= 7.0",
+    "pytest-cov >= 4.0",
+    "mypy >= 1.0",
+    "ruff >= 0.5",
+]
+
+[project.urls]
+Homepage = "https://github.com/jaybythebay/tableau-permissions"
+Repository = "https://github.com/jaybythebay/tableau-permissions"
+
+[project.scripts]
+tableau-permissions = "scripts.tableau_setup:main"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["src*", "configs*", "scripts*"]
+
+[tool.mypy]
+python_version = "3.9"
+warn_return_any = true
+warn_unused_configs = true
+ignore_missing_imports = true
+
+[tool.ruff]
+target-version = "py39"
+line-length = 160
+
+[tool.ruff.lint]
+extend-select = ["E", "F", "W"]
+ignore = ["E501", "W191", "W291", "W292", "E101"]

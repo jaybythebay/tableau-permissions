@@ -1,0 +1,273 @@
+"""
+Maps the permission sets to each group in each project.
+
+```
+structure = {'Project Name': ['Group Name': {'Project Permissions': set, 'Workbook Permissions': set ...}
+```
+
+"""
+
+
+from configs.permission_sets import project_deny_all, project_read, project_write, workbook_deny_all, \
+	workbook_read, workbook_write, datasource_deny_all, datasource_read, \
+    datasource_write, flow_deny_all, flow_write, flow_read, metric_deny_all, metric_read, metric_write
+
+# pylint: disable=line-too-long
+project_group_permissions = {
+    # The script is not working to guarantee NONE ALL permissions on the default project. I've manually removed the
+    # groups from that project
+    # 'default': {
+    #     'Marketing': {'project': project_none_all, 'workbook': workbook_none_all, 'datasource': datasource_none_all},
+    #     'Product': {'project': project_none_all, 'workbook': workbook_none_all, 'datasource': datasource_none_all},
+    #     'Security': {'project': project_none_all, 'workbook': workbook_none_all, 'datasource': datasource_none_all},
+    #     'People': {'project': project_none_all, 'workbook': workbook_none_all, 'datasource': datasource_none_all},
+    #     'Recruiting': {'project': project_none_all, 'workbook': workbook_none_all, 'datasource': datasource_none_all},
+    #     'IT': {'project': project_none_all, 'workbook': workbook_none_all, 'datasource': datasource_none_all},
+    #     'Customer Success': {'project': project_none_all, 'workbook': workbook_none_all, 'datasource': datasource_none_all},
+    #     'Engineering': {'project': project_none_all, 'workbook': workbook_none_all, 'datasource': datasource_none_all},
+    #     'Finance': {'project': project_none_all, 'workbook': workbook_none_all, 'datasource': datasource_none_all},
+    #     'Executive': {'project': project_none_all, 'workbook': workbook_none_all, 'datasource': datasource_none_all},
+    #     'Strategy & Operations': {'project': project_none_all, 'workbook': datasource_none_all,
+    #                               'datasource': datasource_none_all}
+    # },
+    'Samples': {
+        'Marketing': {'project': project_write, 'workbook': workbook_read, 'datasource': datasource_read, 'flow': flow_read, 'metric': metric_read},
+        'Product': {'project': project_read, 'workbook': workbook_deny_all, 'datasource': datasource_read, 'flow': flow_read, 'metric': metric_read},
+        'Security': {'project': project_read, 'workbook': workbook_read, 'datasource': datasource_read, 'flow': flow_deny_all, 'metric': metric_read},
+        'People': {'project': project_read, 'workbook': workbook_read, 'datasource': datasource_write, 'flow': flow_read, 'metric': metric_read},
+        'Recruiting': {'project': project_read, 'workbook': workbook_read, 'datasource': datasource_read, 'flow': flow_read, 'metric': metric_read},
+        'IT': {'project': project_read, 'workbook': workbook_read, 'datasource': datasource_read, 'flow': flow_read, 'metric': metric_read},
+        'Sales': {'project': project_read, 'workbook': workbook_write, 'datasource': datasource_deny_all, 'flow': flow_read, 'metric': metric_read},
+        'Customer Success': {'project': project_read, 'workbook': workbook_read, 'datasource': datasource_read, 'flow': flow_read, 'metric': metric_read},
+        'Engineering': {'project': project_read, 'workbook': workbook_read, 'datasource': datasource_read, 'flow': flow_read, 'metric': metric_read},
+        'Finance': {'project': project_read, 'workbook': workbook_read, 'datasource': datasource_read, 'flow': flow_read, 'metric': metric_read},
+        'Executive': {'project': project_read, 'workbook': workbook_read, 'datasource': datasource_read, 'flow': flow_read, 'metric': metric_read},
+        'Strategy & Operations': {'project': project_write, 'workbook': workbook_write, 'datasource': datasource_write, 'flow': flow_write, 'metric': metric_write},
+        'Sales Managers': {'project': project_read, 'workbook': workbook_read, 'datasource': datasource_read, 'flow': flow_read, 'metric': metric_read}
+    },
+    'Admin Insights': {
+        'Marketing': {'project': project_read, 'workbook': workbook_read, 'datasource': datasource_read, 'flow': flow_deny_all, 'metric': metric_deny_all},
+        'Product': {'project': project_read, 'workbook': workbook_read, 'datasource': datasource_read, 'flow': flow_deny_all, 'metric': metric_deny_all},
+        'Security': {'project': project_read, 'workbook': workbook_read, 'datasource': datasource_read, 'flow': flow_deny_all, 'metric': metric_deny_all},
+        'People': {'project': project_read, 'workbook': workbook_read, 'datasource': datasource_read, 'flow': flow_deny_all, 'metric': metric_deny_all},
+        'Recruiting': {'project': project_read, 'workbook': workbook_read, 'datasource': datasource_read, 'flow': flow_deny_all, 'metric': metric_deny_all},
+        'IT': {'project': project_read, 'workbook': workbook_read, 'datasource': datasource_read, 'flow': flow_deny_all, 'metric': metric_deny_all},
+        'Sales': {'project': project_read, 'workbook': workbook_read, 'datasource': datasource_deny_all, 'flow': flow_deny_all, 'metric': metric_deny_all},
+        'Customer Success': {'project': project_read, 'workbook': workbook_read, 'datasource': datasource_read, 'flow': flow_deny_all, 'metric': metric_deny_all},
+        'Engineering': {'project': project_read, 'workbook': workbook_read, 'datasource': datasource_read, 'flow': flow_deny_all, 'metric': metric_deny_all},
+        'Finance': {'project': project_read, 'workbook': workbook_read, 'datasource': datasource_read, 'flow': flow_deny_all, 'metric': metric_deny_all},
+        'Executive': {'project': project_read, 'workbook': workbook_read, 'datasource': datasource_read, 'flow': flow_deny_all, 'metric': metric_deny_all},
+        'Strategy & Operations': {'project': project_write, 'workbook': workbook_write, 'datasource': datasource_write, 'flow': flow_write, 'metric': metric_write},
+        'Sales Managers': {'project': project_read, 'workbook': workbook_read, 'datasource': datasource_read, 'flow': flow_deny_all, 'metric': metric_deny_all}
+    },
+    'Company All': {
+        'Marketing': {'project': project_read, 'workbook': workbook_read, 'datasource': datasource_read, 'flow': flow_deny_all, 'metric': metric_deny_all},
+        'Product': {'project': project_read, 'workbook': workbook_read, 'datasource': datasource_read, 'flow': flow_deny_all, 'metric': metric_deny_all},
+        'Security': {'project': project_read, 'workbook': workbook_read, 'datasource': datasource_read, 'flow': flow_deny_all, 'metric': metric_deny_all},
+        'People': {'project': project_read, 'workbook': workbook_read, 'datasource': datasource_read, 'flow': flow_deny_all, 'metric': metric_deny_all},
+        'Recruiting': {'project': project_read, 'workbook': workbook_read, 'datasource': datasource_read, 'flow': flow_deny_all, 'metric': metric_deny_all},
+        'IT': {'project': project_read, 'workbook': workbook_read, 'datasource': datasource_read, 'flow': flow_deny_all, 'metric': metric_deny_all},
+        'Sales': {'project': project_read, 'workbook': workbook_read, 'datasource': datasource_read, 'flow': flow_deny_all, 'metric': metric_deny_all},
+        'Customer Success': {'project': project_read, 'workbook': workbook_read, 'datasource': datasource_read, 'flow': flow_deny_all, 'metric': metric_deny_all},
+        'Engineering': {'project': project_read, 'workbook': workbook_read, 'datasource': datasource_read, 'flow': flow_deny_all, 'metric': metric_deny_all},
+        'Finance': {'project': project_read, 'workbook': workbook_read, 'datasource': datasource_read, 'flow': flow_deny_all, 'metric': metric_deny_all},
+        'Executive': {'project': project_read, 'workbook': workbook_read, 'datasource': datasource_read, 'flow': flow_deny_all, 'metric': metric_deny_all},
+        'Strategy & Operations': {'project': project_write, 'workbook': workbook_write, 'datasource': datasource_write, 'flow': flow_write, 'metric': metric_write},
+        'Sales Managers': {'project': project_read, 'workbook': workbook_read, 'datasource': datasource_read, 'flow': flow_deny_all, 'metric': metric_deny_all}
+    },
+    'Finance': {
+        'Marketing': {'project': project_deny_all, 'workbook': workbook_deny_all, 'datasource': datasource_deny_all, 'flow': flow_deny_all, 'metric': metric_deny_all},
+        'Product': {'project': project_deny_all, 'workbook': workbook_deny_all, 'datasource': datasource_deny_all, 'flow': flow_deny_all, 'metric': metric_deny_all},
+        'Security': {'project': project_deny_all, 'workbook': workbook_deny_all, 'datasource': datasource_deny_all, 'flow': flow_deny_all, 'metric': metric_deny_all},
+        'People': {'project': project_deny_all, 'workbook': workbook_deny_all, 'datasource': datasource_deny_all, 'flow': flow_deny_all, 'metric': metric_deny_all},
+        'Recruiting': {'project': project_deny_all, 'workbook': workbook_deny_all, 'datasource': datasource_deny_all, 'flow': flow_deny_all, 'metric': metric_deny_all},
+        'IT': {'project': project_deny_all, 'workbook': workbook_deny_all, 'datasource': datasource_deny_all, 'flow': flow_deny_all, 'metric': metric_deny_all},
+        'Sales': {'project': project_deny_all, 'workbook': workbook_deny_all, 'datasource': datasource_deny_all, 'flow': flow_deny_all, 'metric': metric_deny_all},
+        'Customer Success': {'project': project_deny_all, 'workbook': workbook_deny_all, 'datasource': datasource_deny_all, 'flow': flow_deny_all, 'metric': metric_deny_all},
+        'Engineering': {'project': project_deny_all, 'workbook': workbook_deny_all, 'datasource': datasource_deny_all, 'flow': flow_deny_all, 'metric': metric_deny_all},
+        'Finance': {'project': project_write, 'workbook': workbook_write, 'datasource': datasource_write, 'flow': flow_deny_all, 'metric': metric_deny_all},
+        'Executive': {'project': project_read, 'workbook': workbook_read, 'datasource': datasource_read, 'flow': flow_deny_all, 'metric': metric_deny_all},
+        'Strategy & Operations': {'project': project_write, 'workbook': workbook_write, 'datasource': datasource_write, 'flow': flow_write, 'metric': metric_write},
+        'Sales Managers': {'project': project_deny_all, 'workbook': workbook_deny_all, 'datasource': datasource_deny_all, 'flow': flow_deny_all, 'metric': metric_deny_all}
+    },
+    'Marketing': {
+        'Marketing': {'project': project_write, 'workbook': workbook_write, 'datasource': datasource_write, 'flow': flow_deny_all, 'metric': metric_deny_all},
+        'Product': {'project': project_read, 'workbook': workbook_read, 'datasource': datasource_read, 'flow': flow_deny_all, 'metric': metric_deny_all},
+        'Security': {'project': project_read, 'workbook': workbook_read, 'datasource': datasource_read, 'flow': flow_deny_all, 'metric': metric_deny_all},
+        'People': {'project': project_read, 'workbook': workbook_read, 'datasource': datasource_read, 'flow': flow_deny_all, 'metric': metric_deny_all},
+        'Recruiting': {'project': project_read, 'workbook': workbook_read, 'datasource': datasource_read, 'flow': flow_deny_all, 'metric': metric_deny_all},
+        'IT': {'project': project_read, 'workbook': workbook_read, 'datasource': datasource_read, 'flow': flow_deny_all, 'metric': metric_deny_all},
+        'Sales': {'project': project_read, 'workbook': workbook_read, 'datasource': datasource_deny_all, 'flow': flow_deny_all, 'metric': metric_deny_all},
+        'Customer Success': {'project': project_read, 'workbook': workbook_read, 'datasource': datasource_read, 'flow': flow_deny_all, 'metric': metric_deny_all},
+        'Engineering': {'project': project_read, 'workbook': workbook_read, 'datasource': datasource_read, 'flow': flow_deny_all, 'metric': metric_deny_all},
+        'Finance': {'project': project_read, 'workbook': workbook_read, 'datasource': datasource_read, 'flow': flow_deny_all, 'metric': metric_deny_all},
+        'Executive': {'project': project_read, 'workbook': workbook_read, 'datasource': datasource_read, 'flow': flow_deny_all, 'metric': metric_deny_all},
+        'Strategy & Operations': {'project': project_write, 'workbook': workbook_write, 'datasource': datasource_write, 'flow': flow_write, 'metric': metric_write},
+        'Sales Managers': {'project': project_read, 'workbook': workbook_read, 'datasource': datasource_read, 'flow': flow_deny_all, 'metric': metric_deny_all}
+    },
+    'Customer Success': {
+        'Marketing': {'project': project_read, 'workbook': workbook_read, 'datasource': datasource_read, 'flow': flow_deny_all, 'metric': metric_deny_all},
+        'Product': {'project': project_read, 'workbook': workbook_read, 'datasource': datasource_read, 'flow': flow_deny_all, 'metric': metric_deny_all},
+        'Security': {'project': project_read, 'workbook': workbook_read, 'datasource': datasource_read, 'flow': flow_deny_all, 'metric': metric_deny_all},
+        'People': {'project': project_read, 'workbook': workbook_read, 'datasource': datasource_read, 'flow': flow_deny_all, 'metric': metric_deny_all},
+        'Recruiting': {'project': project_read, 'workbook': workbook_read, 'datasource': datasource_read, 'flow': flow_deny_all, 'metric': metric_deny_all},
+        'IT': {'project': project_read, 'workbook': workbook_read, 'datasource': datasource_read, 'flow': flow_deny_all, 'metric': metric_deny_all},
+        'Sales': {'project': project_read, 'workbook': workbook_read, 'datasource': datasource_deny_all, 'flow': flow_deny_all, 'metric': metric_deny_all},
+        'Customer Success': {'project': project_write, 'workbook': workbook_write, 'datasource': datasource_write, 'flow': flow_deny_all, 'metric': metric_deny_all},
+        'Engineering': {'project': project_read, 'workbook': workbook_read, 'datasource': datasource_read, 'flow': flow_deny_all, 'metric': metric_deny_all},
+        'Finance': {'project': project_read, 'workbook': workbook_read, 'datasource': datasource_read, 'flow': flow_deny_all, 'metric': metric_deny_all},
+        'Executive': {'project': project_read, 'workbook': workbook_read, 'datasource': datasource_read, 'flow': flow_deny_all, 'metric': metric_deny_all},
+        'Strategy & Operations': {'project': project_write, 'workbook': workbook_write, 'datasource': datasource_write, 'flow': flow_write, 'metric': metric_write},
+        'Sales Managers': {'project': project_read, 'workbook': workbook_read, 'datasource': datasource_read, 'flow': flow_deny_all, 'metric': metric_deny_all}
+    },
+    'Product': {
+        'Marketing': {'project': project_read, 'workbook': workbook_read, 'datasource': datasource_read, 'flow': flow_deny_all, 'metric': metric_deny_all},
+        'Product': {'project': project_write, 'workbook': workbook_write, 'datasource': datasource_read, 'flow': flow_deny_all, 'metric': metric_deny_all},
+        'Security': {'project': project_read, 'workbook': workbook_read, 'datasource': datasource_read, 'flow': flow_deny_all, 'metric': metric_deny_all},
+        'People': {'project': project_read, 'workbook': workbook_read, 'datasource': datasource_read, 'flow': flow_deny_all, 'metric': metric_deny_all},
+        'Recruiting': {'project': project_read, 'workbook': workbook_read, 'datasource': datasource_read, 'flow': flow_deny_all, 'metric': metric_deny_all},
+        'IT': {'project': project_read, 'workbook': workbook_read, 'datasource': datasource_read, 'flow': flow_deny_all, 'metric': metric_deny_all},
+        'Sales': {'project': project_read, 'workbook': workbook_read, 'datasource': datasource_read, 'flow': flow_deny_all, 'metric': metric_deny_all},
+        'Customer Success':{'project': project_read, 'workbook': workbook_read, 'datasource': datasource_read, 'flow': flow_deny_all, 'metric': metric_deny_all},
+        'Engineering': {'project': project_read, 'workbook': workbook_read, 'datasource': datasource_read, 'flow': flow_deny_all, 'metric': metric_deny_all},
+        'Finance': {'project': project_read, 'workbook': workbook_read, 'datasource': datasource_read, 'flow': flow_deny_all, 'metric': metric_deny_all},
+        'Executive': {'project': project_read, 'workbook': workbook_read, 'datasource': datasource_read, 'flow': flow_deny_all, 'metric': metric_deny_all},
+        'Strategy & Operations': {'project': project_write, 'workbook': workbook_write, 'datasource': datasource_write, 'flow': flow_write, 'metric': metric_write},
+        'Sales Managers': {'project': project_read, 'workbook': workbook_read, 'datasource': datasource_read, 'flow': flow_deny_all, 'metric': metric_deny_all}
+    },
+    'Engineering': {
+        'Marketing': {'project': project_deny_all, 'workbook': workbook_deny_all, 'datasource': datasource_deny_all, 'flow': flow_deny_all, 'metric': metric_deny_all},
+        'Product': {'project': project_read, 'workbook': workbook_read, 'datasource': datasource_deny_all, 'flow': flow_deny_all, 'metric': metric_deny_all},
+        'Security': {'project': project_read, 'workbook': workbook_read, 'datasource': datasource_read, 'flow': flow_deny_all, 'metric': metric_deny_all},
+        'People': {'project': project_deny_all, 'workbook': workbook_deny_all, 'datasource': datasource_deny_all, 'flow': flow_deny_all, 'metric': metric_deny_all},
+        'Recruiting': {'project': project_deny_all, 'workbook': workbook_deny_all, 'datasource': datasource_deny_all, 'flow': flow_deny_all, 'metric': metric_deny_all},
+        'IT': {'project': project_read, 'workbook': workbook_read, 'datasource': datasource_read, 'flow': flow_deny_all, 'metric': metric_deny_all},
+        'Sales': {'project': project_deny_all, 'workbook': workbook_deny_all, 'datasource': datasource_deny_all, 'flow': flow_deny_all, 'metric': metric_deny_all},
+        'Customer Success': {'project': project_deny_all, 'workbook': workbook_deny_all, 'datasource': datasource_deny_all, 'flow': flow_deny_all, 'metric': metric_deny_all},
+        'Engineering': {'project': project_write, 'workbook': workbook_write, 'datasource': datasource_write, 'flow': flow_deny_all, 'metric': metric_deny_all},
+        'Finance': {'project': project_read, 'workbook': workbook_read, 'datasource': datasource_read, 'flow': flow_deny_all, 'metric': metric_deny_all},
+        'Executive': {'project': project_read, 'workbook': workbook_read, 'datasource': datasource_read, 'flow': flow_deny_all, 'metric': metric_deny_all},
+        'Strategy & Operations': {'project': project_write, 'workbook': workbook_write, 'datasource': datasource_write, 'flow': flow_write, 'metric': metric_write},
+        'Sales Managers': {'project': project_deny_all, 'workbook': workbook_deny_all, 'datasource': datasource_deny_all, 'flow': flow_deny_all, 'metric': metric_deny_all}
+    },
+    'Security': {
+        'Marketing': {'project': project_deny_all, 'workbook': workbook_deny_all, 'datasource': datasource_deny_all, 'flow': flow_deny_all, 'metric': metric_deny_all},
+        'Product': {'project': project_read, 'workbook': workbook_read, 'datasource': datasource_read, 'flow': flow_deny_all, 'metric': metric_deny_all},
+        'Security': {'project': project_write, 'workbook': workbook_write, 'datasource': datasource_write, 'flow': flow_deny_all, 'metric': metric_deny_all},
+        'People': {'project': project_deny_all, 'workbook': workbook_deny_all, 'datasource': datasource_deny_all, 'flow': flow_deny_all, 'metric': metric_deny_all},
+        'Recruiting': {'project': project_deny_all, 'workbook': workbook_deny_all, 'datasource': datasource_deny_all, 'flow': flow_deny_all, 'metric': metric_deny_all},
+        'IT': {'project': project_deny_all, 'workbook': workbook_deny_all, 'datasource': datasource_deny_all, 'flow': flow_deny_all, 'metric': metric_deny_all},
+        'Sales': {'project': project_deny_all, 'workbook': workbook_deny_all, 'datasource': datasource_deny_all, 'flow': flow_deny_all, 'metric': metric_deny_all},
+        'Customer Success': {'project': project_deny_all, 'workbook': workbook_deny_all, 'datasource': datasource_deny_all, 'flow': flow_deny_all, 'metric': metric_deny_all},
+        'Engineering': {'project': project_read, 'workbook': workbook_read, 'datasource': datasource_read, 'flow': flow_deny_all, 'metric': metric_deny_all},
+        'Finance': {'project': project_deny_all, 'workbook': workbook_deny_all, 'datasource': datasource_deny_all, 'flow': flow_deny_all, 'metric': metric_deny_all},
+        'Executive': {'project': project_read, 'workbook': workbook_read, 'datasource': datasource_read, 'flow': flow_deny_all, 'metric': metric_deny_all},
+        'Strategy & Operations': {'project': project_write, 'workbook': workbook_write, 'datasource': datasource_write, 'flow': flow_write, 'metric': metric_write},
+        'Sales Managers': {'project': project_deny_all, 'workbook': workbook_deny_all, 'datasource': datasource_deny_all, 'flow': flow_deny_all, 'metric': metric_deny_all}
+    },
+    'People': {
+        'Marketing': {'project': project_read, 'workbook': workbook_read, 'datasource': datasource_read, 'flow': flow_deny_all, 'metric': metric_deny_all},
+        'Product': {'project': project_read, 'workbook': workbook_read, 'datasource': datasource_read, 'flow': flow_deny_all, 'metric': metric_deny_all},
+        'Security': {'project': project_read, 'workbook': workbook_read, 'datasource': datasource_read, 'flow': flow_deny_all, 'metric': metric_deny_all},
+        'People': {'project': project_write, 'workbook': workbook_write, 'datasource': datasource_write, 'flow': flow_deny_all, 'metric': metric_deny_all},
+        'Recruiting': {'project': project_read, 'workbook': workbook_read, 'datasource': datasource_read, 'flow': flow_deny_all, 'metric': metric_deny_all},
+        'IT': {'project': project_read, 'workbook': workbook_read, 'datasource': datasource_read, 'flow': flow_deny_all, 'metric': metric_deny_all},
+        'Sales': {'project': project_read, 'workbook': workbook_read, 'datasource': datasource_deny_all, 'flow': flow_deny_all, 'metric': metric_deny_all},
+        'Customer Success': {'project': project_read, 'workbook': workbook_read, 'datasource': datasource_read, 'flow': flow_deny_all, 'metric': metric_deny_all},
+        'Engineering': {'project': project_read, 'workbook': workbook_read, 'datasource': datasource_read, 'flow': flow_deny_all, 'metric': metric_deny_all},
+        'Finance': {'project': project_read, 'workbook': workbook_read, 'datasource': datasource_read, 'flow': flow_deny_all, 'metric': metric_deny_all},
+        'Executive': {'project': project_read, 'workbook': workbook_read, 'datasource': datasource_read, 'flow': flow_deny_all, 'metric': metric_deny_all},
+        'Strategy & Operations': {'project': project_write, 'workbook': workbook_write, 'datasource': datasource_write, 'flow': flow_deny_all, 'metric': metric_deny_all},
+        'Sales Managers': {'project': project_read, 'workbook': workbook_read, 'datasource': datasource_deny_all, 'flow': flow_deny_all, 'metric': metric_deny_all}
+    },
+    'Recruiting': {
+        'Marketing': {'project': project_read, 'workbook': workbook_read, 'datasource': datasource_read, 'flow': flow_deny_all, 'metric': metric_deny_all},
+        'Product': {'project': project_read, 'workbook': workbook_read, 'datasource': datasource_read, 'flow': flow_deny_all, 'metric': metric_deny_all},
+        'Security': {'project': project_read, 'workbook': workbook_read, 'datasource': datasource_read, 'flow': flow_deny_all, 'metric': metric_deny_all},
+        'People': {'project': project_read, 'workbook': workbook_read, 'datasource': datasource_read, 'flow': flow_deny_all, 'metric': metric_deny_all},
+        'Recruiting': {'project': project_write, 'workbook': workbook_write, 'datasource': datasource_write, 'flow': flow_deny_all, 'metric': metric_deny_all},
+        'IT': {'project': project_read, 'workbook': workbook_read, 'datasource': datasource_read, 'flow': flow_deny_all, 'metric': metric_deny_all},
+        'Sales': {'project': project_read, 'workbook': workbook_read, 'datasource': datasource_deny_all, 'flow': flow_deny_all, 'metric': metric_deny_all},
+        'Customer Success': {'project': project_read, 'workbook': workbook_read, 'datasource': datasource_read, 'flow': flow_deny_all, 'metric': metric_deny_all},
+        'Engineering': {'project': project_read, 'workbook': workbook_read, 'datasource': datasource_read, 'flow': flow_deny_all, 'metric': metric_deny_all},
+        'Finance': {'project': project_read, 'workbook': workbook_read, 'datasource': datasource_read, 'flow': flow_deny_all, 'metric': metric_deny_all},
+        'Executive': {'project': project_read, 'workbook': workbook_read, 'datasource': datasource_read, 'flow': flow_deny_all, 'metric': metric_deny_all},
+        'Strategy & Operations': {'project': project_write, 'workbook': workbook_write, 'datasource': datasource_write, 'flow': flow_write, 'metric': metric_write},
+        'Sales Managers': {'project': project_read, 'workbook': workbook_read, 'datasource': datasource_deny_all, 'flow': flow_deny_all, 'metric': metric_deny_all}
+      },
+    'IT': {
+        'Marketing': {'project': project_read, 'workbook': workbook_read, 'datasource': datasource_read, 'flow': flow_deny_all, 'metric': metric_deny_all},
+        'Product': {'project': project_read, 'workbook': workbook_read, 'datasource': datasource_read, 'flow': flow_deny_all, 'metric': metric_deny_all},
+        'Security': {'project': project_read, 'workbook': workbook_read, 'datasource': datasource_read, 'flow': flow_deny_all, 'metric': metric_deny_all},
+        'People': {'project': project_read, 'workbook': workbook_read, 'datasource': datasource_read, 'flow': flow_deny_all, 'metric': metric_deny_all},
+        'Recruiting': {'project': project_read, 'workbook': workbook_read, 'datasource': datasource_read, 'flow': flow_deny_all, 'metric': metric_deny_all},
+        'IT': {'project': project_write, 'workbook': workbook_write, 'datasource': datasource_write, 'flow': flow_deny_all, 'metric': metric_deny_all},
+        'Sales': {'project': project_read, 'workbook': workbook_read, 'datasource': datasource_deny_all, 'flow': flow_deny_all, 'metric': metric_deny_all},
+        'Customer Success': {'project': project_read, 'workbook': workbook_read, 'datasource': datasource_read, 'flow': flow_deny_all, 'metric': metric_deny_all},
+        'Engineering': {'project': project_read, 'workbook': workbook_read, 'datasource': datasource_read, 'flow': flow_deny_all, 'metric': metric_deny_all},
+        'Finance': {'project': project_read, 'workbook': workbook_read, 'datasource': datasource_read, 'flow': flow_deny_all, 'metric': metric_deny_all},
+        'Executive': {'project': project_read, 'workbook': workbook_read, 'datasource': datasource_read, 'flow': flow_deny_all, 'metric': metric_deny_all},
+        'Strategy & Operations': {'project': project_write, 'workbook': workbook_write, 'datasource': datasource_write, 'flow': flow_write, 'metric': metric_write},
+        'Sales Managers': {'project': project_read, 'workbook': workbook_read, 'datasource': datasource_deny_all, 'flow': flow_deny_all, 'metric': metric_deny_all}
+    },
+    'Executive': {
+        'Marketing': {'project': project_deny_all, 'workbook': workbook_deny_all, 'datasource': datasource_deny_all, 'flow': flow_deny_all, 'metric': metric_deny_all},
+        'Product': {'project': project_deny_all, 'workbook': workbook_deny_all, 'datasource': datasource_deny_all, 'flow': flow_deny_all, 'metric': metric_deny_all},
+        'Security': {'project': project_deny_all, 'workbook': workbook_deny_all, 'datasource': datasource_deny_all, 'flow': flow_deny_all, 'metric': metric_deny_all},
+        'People': {'project': project_deny_all, 'workbook': workbook_deny_all, 'datasource': datasource_deny_all, 'flow': flow_deny_all, 'metric': metric_deny_all},
+        'Recruiting': {'project': project_deny_all, 'workbook': workbook_deny_all, 'datasource': datasource_deny_all, 'flow': flow_deny_all, 'metric': metric_deny_all},
+        'IT': {'project': project_deny_all, 'workbook': workbook_deny_all, 'datasource': datasource_deny_all, 'flow': flow_deny_all, 'metric': metric_deny_all},
+        'Sales': {'project': project_deny_all, 'workbook': workbook_deny_all, 'datasource': datasource_deny_all, 'flow': flow_deny_all, 'metric': metric_deny_all},
+        'Customer Success': {'project': project_deny_all, 'workbook': workbook_deny_all, 'datasource': datasource_deny_all, 'flow': flow_deny_all, 'metric': metric_deny_all},
+        'Engineering': {'project': project_deny_all, 'workbook': workbook_deny_all, 'datasource': datasource_deny_all, 'flow': flow_deny_all, 'metric': metric_deny_all},
+        'Finance': {'project': project_deny_all, 'workbook': workbook_deny_all, 'datasource': datasource_deny_all, 'flow': flow_deny_all, 'metric': metric_deny_all},
+        'Executive': {'project': project_write, 'workbook': workbook_write, 'datasource': datasource_write, 'flow': flow_deny_all, 'metric': metric_deny_all},
+        'Strategy & Operations': {'project': project_write, 'workbook': workbook_write, 'datasource': datasource_write, 'flow': flow_write, 'metric': metric_write},
+        'Sales Managers': {'project': project_deny_all, 'workbook': workbook_deny_all, 'datasource': datasource_deny_all, 'flow': flow_deny_all, 'metric': metric_deny_all}
+      },
+    'Sales': {
+        'Marketing': {'project': project_read, 'workbook': workbook_read, 'datasource': datasource_read, 'flow': flow_deny_all, 'metric': metric_deny_all},
+        'Product': {'project': project_read, 'workbook': workbook_read, 'datasource': datasource_read, 'flow': flow_deny_all, 'metric': metric_deny_all},
+        'Security': {'project': project_read, 'workbook': workbook_read, 'datasource': datasource_read, 'flow': flow_deny_all, 'metric': metric_deny_all},
+        'People': {'project': project_read, 'workbook': workbook_read, 'datasource': datasource_read, 'flow': flow_deny_all, 'metric': metric_deny_all},
+        'Recruiting': {'project': project_read, 'workbook': workbook_read, 'datasource': datasource_read, 'flow': flow_deny_all, 'metric': metric_deny_all},
+        'IT': {'project': project_read, 'workbook': workbook_read, 'datasource': datasource_read, 'flow': flow_deny_all, 'metric': metric_deny_all},
+        'Sales': {'project': project_write, 'workbook': workbook_write, 'datasource': datasource_write, 'flow': flow_deny_all, 'metric': metric_deny_all},
+        'Customer Success': {'project': project_read, 'workbook': workbook_read, 'datasource': datasource_read, 'flow': flow_deny_all, 'metric': metric_deny_all},
+        'Engineering': {'project': project_read, 'workbook': workbook_read, 'datasource': datasource_read, 'flow': flow_deny_all, 'metric': metric_deny_all},
+        'Finance': {'project': project_read, 'workbook': workbook_read, 'datasource': datasource_read, 'flow': flow_deny_all, 'metric': metric_deny_all},
+        'Executive': {'project': project_read, 'workbook': workbook_read, 'datasource': datasource_read, 'flow': flow_deny_all, 'metric': metric_deny_all},
+        'Strategy & Operations': {'project': project_write, 'workbook': workbook_write, 'datasource': datasource_write, 'flow': flow_write, 'metric': metric_write},
+        'Sales Managers': {'project': project_write, 'workbook': workbook_write, 'datasource': datasource_write, 'flow': flow_deny_all, 'metric': metric_deny_all}
+    },
+    'Strategy & Operations': {
+        'Marketing': {'project': project_deny_all, 'workbook': workbook_deny_all, 'datasource': datasource_deny_all, 'flow': flow_deny_all, 'metric': metric_deny_all},
+        'Product': {'project': project_deny_all, 'workbook': workbook_deny_all, 'datasource': datasource_deny_all, 'flow': flow_deny_all, 'metric': metric_deny_all},
+        'Security': {'project': project_deny_all, 'workbook': workbook_deny_all, 'datasource': datasource_deny_all, 'flow': flow_deny_all, 'metric': metric_deny_all},
+        'People': {'project': project_deny_all, 'workbook': workbook_deny_all, 'datasource': datasource_deny_all, 'flow': flow_deny_all, 'metric': metric_deny_all},
+        'Recruiting': {'project': project_deny_all, 'workbook': workbook_deny_all, 'datasource': datasource_deny_all, 'flow': flow_deny_all, 'metric': metric_deny_all},
+        'IT': {'project': project_deny_all, 'workbook': workbook_deny_all, 'datasource': datasource_deny_all, 'flow': flow_deny_all, 'metric': metric_deny_all},
+        'Sales': {'project': project_deny_all, 'workbook': workbook_deny_all, 'datasource': datasource_deny_all, 'flow': flow_deny_all, 'metric': metric_deny_all},
+        'Customer Success': {'project': project_deny_all, 'workbook': workbook_deny_all, 'datasource': datasource_deny_all, 'flow': flow_deny_all, 'metric': metric_deny_all},
+        'Engineering': {'project': project_deny_all, 'workbook': workbook_deny_all, 'datasource': datasource_deny_all, 'flow': flow_deny_all, 'metric': metric_deny_all},
+        'Finance': {'project': project_read, 'workbook': workbook_read, 'datasource': datasource_deny_all, 'flow': flow_deny_all, 'metric': metric_deny_all},
+        'Executive': {'project': project_read, 'workbook': workbook_read, 'datasource': datasource_deny_all, 'flow': flow_deny_all, 'metric': metric_deny_all},
+        'Strategy & Operations': {'project': project_write, 'workbook': workbook_write, 'datasource': datasource_write, 'flow': flow_write, 'metric': metric_write},
+        'Sales Managers': {'project': project_deny_all, 'workbook': workbook_deny_all, 'datasource': datasource_deny_all, 'flow': flow_deny_all, 'metric': metric_deny_all}
+    },
+    'Sales Managers': {
+        'Marketing': {'project': project_deny_all, 'workbook': workbook_deny_all, 'datasource': datasource_deny_all, 'flow': flow_deny_all, 'metric': metric_deny_all},
+        'Product': {'project': project_deny_all, 'workbook': workbook_deny_all, 'datasource': datasource_deny_all, 'flow': flow_deny_all, 'metric': metric_deny_all},
+        'Security': {'project': project_deny_all, 'workbook': workbook_deny_all, 'datasource': datasource_deny_all, 'flow': flow_deny_all, 'metric': metric_deny_all},
+        'People': {'project': project_deny_all, 'workbook': workbook_deny_all, 'datasource': datasource_deny_all, 'flow': flow_deny_all, 'metric': metric_deny_all},
+        'Recruiting': {'project': project_deny_all, 'workbook': workbook_deny_all, 'datasource': datasource_deny_all, 'flow': flow_deny_all, 'metric': metric_deny_all},
+        'IT': {'project': project_deny_all, 'workbook': workbook_deny_all, 'datasource': datasource_deny_all, 'flow': flow_deny_all, 'metric': metric_deny_all},
+        'Sales': {'project': project_deny_all, 'workbook': workbook_deny_all, 'datasource': datasource_deny_all, 'flow': flow_deny_all, 'metric': metric_deny_all},
+        'Customer Success': {'project': project_deny_all, 'workbook': workbook_deny_all, 'datasource': datasource_deny_all, 'flow': flow_deny_all, 'metric': metric_deny_all},
+        'Engineering': {'project': project_deny_all, 'workbook': workbook_deny_all, 'datasource': datasource_deny_all, 'flow': flow_deny_all, 'metric': metric_deny_all},
+        'Finance': {'project': project_read, 'workbook': workbook_read, 'datasource': datasource_read, 'flow': flow_deny_all, 'metric': metric_deny_all},
+        'Executive': {'project': project_read, 'workbook': workbook_read, 'datasource': datasource_read, 'flow': flow_deny_all, 'metric': metric_deny_all},
+        'Strategy & Operations': {'project': project_write, 'workbook': workbook_write, 'datasource': datasource_write, 'flow': flow_write, 'metric': metric_write},
+        'Sales Managers': {'project': project_write, 'workbook': workbook_write, 'datasource': datasource_write, 'flow': flow_deny_all, 'metric': metric_deny_all}
+    },
+}
